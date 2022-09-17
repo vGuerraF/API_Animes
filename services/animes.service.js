@@ -13,13 +13,9 @@ const getAnimeId = (id) => {
     if (anime.id === id) {
       animeIdFounded = anime;
     }
-
-    if (animeIdFounded) {
-      return animeIdFounded;
-    } else {
-      throw new Error("Nenhum anime com esse id foi encontrado");
-    }
   });
+
+  return animeIdFounded;
 };
 
 const createAnime = (animeObj) => {
@@ -44,8 +40,6 @@ const createAnime = (animeObj) => {
   };
 
   animes.push(newAnimeValidated);
-
-  
 };
 
 const updateAnime = (anime) => {
@@ -59,7 +53,7 @@ const updateAnime = (anime) => {
   anime.characters.map((character) => {
     const updateCharacter = new CharacterEntity(character);
     updateCharacter.validate();
-    updateCharacters.push(updateCharacter);
+    updateCharacters.push(updateCharacter.getCharacter());
   });
 
   const updatedAnime = {

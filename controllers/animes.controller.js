@@ -14,17 +14,25 @@ const getAnimeId = (req, res) => {
 const createAnime = (req, res) => {
   const animeBody = req.body;
   const createToService = animesService.createAnime(animeBody);
-  req.send(createToService);
+  res.send(createToService);
 };
 
 const updateAnime = (req, res) => {
   const animeBody = req.body;
   const updateToService = animesService.updateAnime(animeBody);
-  req.send(updateToService);
+  res.send(updateToService);
 };
 
 const deleteAnime = (req, res) => {
   const animeId = req.params.id;
   const deleteToService = animesService.deleteAnime(animeId);
-  req.send(deleteToService);
+  res.send(deleteToService);
+};
+
+module.exports = {
+  getAllAnimes,
+  getAnimeId,
+  createAnime,
+  updateAnime,
+  deleteAnime,
 };
