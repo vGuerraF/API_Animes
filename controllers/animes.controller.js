@@ -1,32 +1,56 @@
 const animesService = require("../services/animes.service");
 
-const getAllAnimes = (req, res) => {
-  const getAllToService = animesService.getAllAnimes();
-  res.send(getAllToService);
+const getAllAnimes = async (req, res) => {
+  try {
+    const getAllByService = await animesService.getAllAnimes();
+    res.status(200).send(getAllByService);
+  } catch (err) {
+    console.log(err);
+    res.status(500);
+  }
 };
 
-const getAnimeId = (req, res) => {
+const getAnimeId = async (req, res) => {
   const animeId = req.params.id;
-  const getIdToService = animesService.getAnimeId(animeId);
-  res.send(getIdToService);
+  const getIdByService = await animesService.getAnimeId(animeId);
+  if (getIdByService) {
+    res.status(200).send(getIdByService);
+  } else {
+    res.status(400).send({ message: "Nao existe nenhum anime com esse id" });
+  }
 };
 
-const createAnime = (req, res) => {
-  const animeBody = req.body;
-  const createToService = animesService.createAnime(animeBody);
-  res.send(createToService);
+const createAnime = async (req, res) => {
+  try {
+    const animeBody = req.body;
+    const createByService = await animesService.createAnime(animeBody);
+    res.status(201).send(createByService);
+  } catch (err) {
+    res.status(400).send({ message: err.message });
+  }
 };
 
-const updateAnime = (req, res) => {
-  const animeBody = req.body;
-  const updateToService = animesService.updateAnime(animeBody);
-  res.send(updateToService);
+const updateAnime = async (req, res) => {
+  try {
+    const animeBody = req.body;
+    const updateByService = await animesService.updateAnime(animeBody);
+    res.status(200).send(updateByService);
+  } catch (err) {
+    res.status(400).send({ message: err.message });
+  }
 };
 
-const deleteAnime = (req, res) => {
+const deleteAnime = async (req, res) => {
   const animeId = req.params.id;
-  const deleteToService = animesService.deleteAnime(animeId);
-  res.send(deleteToService);
+  const deleteByService = await animesService.deleteAnime(animeId);
+  if (deleteByService) {
+    res.status(200).send(deleteByService);
+  } else {
+    res
+      .status(400)
+      .send({ message: "Nenhum anime com esse id foi encontrado" });
+  }
+  res.send(deleteByService);
 };
 
 module.exports = {

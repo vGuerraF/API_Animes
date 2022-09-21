@@ -1,24 +1,19 @@
 const animes = require("../mocks/animes");
+const Anime = require("../dataBase/models/animeSchema");
 const AnimeEntity = require("../entities/anime.entity");
 const CharacterEntity = require("../entities/character.entity");
 
-const getAllAnimes = () => {
-  return animes;
+const getAllAnimes = async () => {
+  return await Anime.find();
 };
 
-const getAnimeId = (id) => {
-  let animeIdFounded;
-
-  animes.map((anime) => {
-    if (anime.id === id) {
-      animeIdFounded = anime;
-    }
-  });
+const getAnimeId = async (id) => {
+  const animeIdFounded = await Anime.findOne({ id: id });
 
   return animeIdFounded;
 };
 
-const createAnime = (animeObj) => {
+const createAnime = async (animeObj) => {
   const newAnime = new AnimeEntity(animeObj);
   newAnime.validate();
 
@@ -39,10 +34,11 @@ const createAnime = (animeObj) => {
     characters: newCharacters,
   };
 
-  animes.push(newAnimeValidated);
+  const animeCreated = await Anime.create(newAnimeValidated);
+  return animeCreated;
 };
 
-const updateAnime = (anime) => {
+const updateAnime = async (anime) => {
   const updateAnime = new AnimeEntity(anime);
   updateAnime.validate();
 
@@ -61,19 +57,18 @@ const updateAnime = (anime) => {
     characters: updateCharacters,
   };
 
-  animes.map((eachAnime, index) => {
-    if (eachAnime.id === updateAnime.id) {
-      animes.splice(index, 1, updatedAnime);
-    }
-  });
+  const spliceAnime = await Anime.findOneAndUpdate(
+    { id: anime.id },
+    updatedAnime,
+    { new: true }
+  );
+  return spliceAnime;
 };
 
-const deleteAnime = (id) => {
-  animes.map((eachAnime, index) => {
-    if (eachAnime.id === id) {
-      animes.splice(index, 1);
-    }
-  });
+const deleteAnime = async (id) => {
+  const animeFinded = await Anime.findOneAndDelete({ id: id });
+
+  return animeFinded;
 };
 
 module.exports = {
