@@ -1,0 +1,28 @@
+{
+    "openapi": "3.0.0",
+    "info": { "title": "Animes Api", "version": "1.0.0", "description": "A Api from animes" },
+    "serves": [
+        {
+            "url": "http://localhost:3000/animes",
+            "description": "DEV"
+        },
+        {
+            "url": "",
+            "description": "PROD"
+        }
+    ],
+    "paths": {
+        "/" : {
+            "get": {
+                "summary": "this endpoint returns all animes in database",
+                "tags": ["Animes"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    }
+}
+
