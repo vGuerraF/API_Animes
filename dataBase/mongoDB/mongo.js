@@ -1,7 +1,7 @@
 const { connect } = require("mongoose");
 
 const connectMongoose = () => {
-  connect("URL do mongoDB")
+  connect("mongodb+srv://admin:admin@cluster0.6tmo4tg.mongodb.net/?retryWrites=true&w=majority")
     .then(() => {
       console.log("DataBase connected");
     })
