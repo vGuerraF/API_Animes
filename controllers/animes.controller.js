@@ -50,7 +50,6 @@ const deleteAnime = async (req, res) => {
       .status(400)
       .send({ message: "Nenhum anime com esse id foi encontrado" });
   }
-  res.send(deleteByService);
 };
 
 module.exports = {
