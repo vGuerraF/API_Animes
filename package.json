@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./index.js"
+    "dev": "nodemon ./index.js",
+    "doc": "node ./docs/autodoc.js"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +15,7 @@
     "express": "^4.18.1",
     "mongoose": "^6.6.1",
     "nodemon": "^2.0.19",
+    "swagger-autogen": "^2.22.0",
     "swagger-ui-express": "^4.5.0"
   }
 }

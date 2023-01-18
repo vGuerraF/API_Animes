@@ -4,7 +4,7 @@ const cors = require("cors");
 const AnimeRoutes = require("./routes/animes.routes");
 const connectMongoose = require("./dataBase/mongoDB/mongo");
 const swaggerUi = require("swagger-ui-express");
-const swaggerDoc = require("./docs/(incomplet).swagger.json");
+const swaggerDoc = require("./swagger_output.json");
 
 app.use("/api/doc", swaggerUi.serve);
 app.get("/api/doc", swaggerUi.setup(swaggerDoc));
